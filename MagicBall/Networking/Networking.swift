@@ -1,21 +1,37 @@
 import Foundation
 
 class Networking {
-    func getMagicBall(nickname: String, completion: @escaping (Result<Magic, Error>) -> ()) {
-        let session = URLSession.shared
-        let url = URL(string: "https://8ball.delegator.com/magic/JSON/<MY FUTURE>")!
-        let task = session.dataTask(with: url) { (data, responds, error) in
-            guard error == nil else {
-                print("DataTask: error: \(error!.localizedDescription)")
+    func getMagic(question: String, completion: @escaping (Result<Magic, Error>) -> ()) {
+        guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/my future") else {
+            return
+        }
+    
+        getData(url: url, completion: completion)
+    }
+    
+    private func getData<T: Codable>(url: URL, completion: @escaping (Result<T, Error>) -> ()) {
+        URLSession.shared.dataTask(with: url) { (data, respons, error) in
+            guard let data = data, error == nil else {
+                DispatchQueue.main.async {
+                    completion(.failure(error!))
+                }
                 return
             }
+
             do {
-                self.= try JSONDecoder().decode(.self, from: data!)
+                print(String(data: data, encoding: .utf8))
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let decodedData = try decoder.decode(T.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(decodedData))
+                }
             } catch {
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             }
-        }
-        task.resume()
+        }.resume()
     }
 }
 
