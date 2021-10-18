@@ -2,18 +2,14 @@ import Foundation
 
 class Networking {
     func getWelcome(question: String, completion: @escaping (Result<Welcome, Error>) -> ()) {
-        let urlQuestion = "My future with spaces"
-        guard let escapedAddress = urlQuestion.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+        guard let escapedAddress = question.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
             return
         }
         guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/\(escapedAddress)") else {
             return
-            
         }
-        
         getData(url: url, completion: completion)
     }
-   
     
     private func getData<T: Codable>(url: URL, completion: @escaping (Result<T, Error>) -> ()) {
         URLSession.shared.dataTask(with: url) { (data, respons, error) in
@@ -23,7 +19,7 @@ class Networking {
                 }
                 return
             }
-
+            
             do {
                 print(String(data: data, encoding: .utf8))
                 let decoder = JSONDecoder()

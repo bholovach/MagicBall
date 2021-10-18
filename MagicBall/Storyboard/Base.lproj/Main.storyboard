@@ -56,7 +56,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="AnswerLabel" destination="9tg-RP-KUb" id="edb-l6-xS4"/>
+                        <outlet property="answerLabel" destination="9tg-RP-KUb" id="edb-l6-xS4"/>
                         <outlet property="myQuestionLabel" destination="cgf-gc-5N7" id="LMD-4P-89u"/>
                         <segue destination="d2D-gs-AJe" kind="show" id="itq-VZ-iH2"/>
                     </connections>

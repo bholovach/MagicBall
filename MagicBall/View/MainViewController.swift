@@ -15,8 +15,9 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var AnswerLabel: UILabel!
-    var urlQuestion = "My future with spaces"
+    @IBOutlet weak var answerLabel: UILabel!
+    
+    private var urlQuestion = "My future with spaces"
     private let networking = Networking()
     private var errorAnswer = "Try again"
     
@@ -24,10 +25,10 @@ class MainViewController: UIViewController {
         networking.getWelcome(question: urlQuestion) { result in
             switch result {
             case .success(let answerMagic):
-                self.AnswerLabel.text = answerMagic.magic.answer
+                self.answerLabel.text = answerMagic.magic.answer
                 print(answerMagic)
             case .failure:
-                self.AnswerLabel.text = self.errorAnswer
+                self.answerLabel.text = self.errorAnswer
             }
         }
     }
