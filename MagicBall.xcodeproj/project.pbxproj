@@ -65,29 +65,29 @@
 				52EC46B4270C5AC300A62808 /* Networking */,
 				52EC46B1270C3FEF00A62808 /* Model */,
 				52EC46B0270C3FC200A62808 /* Supporting */,
-				52EC46AF270C3FBB00A62808 /* View */,
-				52EC46AE270C3FB100A62808 /* Storyboard */,
+				52EC46AF270C3FBB00A62808 /* Controllers */,
+				52EC46AE270C3FB100A62808 /* View */,
 				52EC46A8270C3FA500A62808 /* Info.plist */,
 			);
 			path = MagicBall;
 			sourceTree = "<group>";
 		};
-		52EC46AE270C3FB100A62808 /* Storyboard */ = {
+		52EC46AE270C3FB100A62808 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				52EC46A5270C3FA500A62808 /* LaunchScreen.storyboard */,
 				52EC46A0270C3FA200A62808 /* Main.storyboard */,
 			);
-			path = Storyboard;
+			path = View;
 			sourceTree = "<group>";
 		};
-		52EC46AF270C3FBB00A62808 /* View */ = {
+		52EC46AF270C3FBB00A62808 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				52EC469E270C3FA200A62808 /* MainViewController.swift */,
 				52EC46B2270C47BD00A62808 /* SettingsViewController.swift */,
 			);
-			path = View;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		52EC46B0270C3FC200A62808 /* Supporting */ = {
