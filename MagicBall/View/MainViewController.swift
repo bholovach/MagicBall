@@ -3,25 +3,39 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBAction func editDidTap(_ sender: Any) {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewcontroller = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        viewcontroller.delegate = self
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
     }
-    @IBOutlet weak var myQuestionLabel: UILabel!
-    @IBOutlet weak var myAnswerLabel: UILabel!
-       
     
+    @IBOutlet weak var myQuestionLabel: UILabel! {
+        didSet {
+            myQuestionLabel.text = urlQuestion
+        }
+    }
+    
+    @IBOutlet weak var AnswerLabel: UILabel!
+    var urlQuestion = "My future with spaces"
     private let networking = Networking()
+    private var errorAnswer = "Try again"
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        networking.getMagic(question: "my future") { result in
+        networking.getWelcome(question: urlQuestion) { result in
             switch result {
-            case .success(let question):
-                self.myAnswerLabel
-                print(question)
-            case .failure(let error):
-                print(error)
+            case .success(let answerMagic):
+                self.AnswerLabel.text = answerMagic.magic.answer
+                print(answerMagic)
+            case .failure:
+                self.AnswerLabel.text = self.errorAnswer
             }
         }
     }
 }
 
-
+extension MainViewController: SettingsViewControllerDelegate {
+    func saveButton(error: String) {
+        errorAnswer = error
+    }
+    
+}
